@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-import api from './services/api';
-import LoaderContent from './loaderContent';
+import api from '../../services/api';
+import LoaderContent from '../../loaderContent';
 import { useCallback } from 'react';
+
+import Container from '../pages/App/style';
 
 const App: React.FC = () => {
   const [ photo, setPhoto ] = useState<string>('');
@@ -31,16 +33,15 @@ const App: React.FC = () => {
   }, [photo])
 
   return (
-    <div>
-      <div>
+    <Container>
+      <div className="content">
         <h1>Hello Gama!</h1>
         <h4>Veja estas imagens</h4>
         <button onClick={ handleSortImage }>Clique aqui!</button>
       </div>
-      { isLoad && <LoaderContent/>}
+      { isLoad ? <LoaderContent/> : (<img src={photo} width="500px" height="auto" alt="Dog" />)}
 
-      <img src={photo} alt="Dog" />
-    </div>
+    </Container>
   );
 }
 
